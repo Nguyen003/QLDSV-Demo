@@ -23,7 +23,7 @@
         background: #0d6efd
     }
 
-    td {
+    td, th {
         text-align: center;
     }
 
@@ -39,8 +39,8 @@
         <small>Danh sách chi tiết</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Quản lý lớp tín chỉ</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Danh mục</a></li>
+        <li class="active">Lớp tín chỉ</li>
     </ol>
 </section>
 <hr />
@@ -53,22 +53,22 @@
             <tr>
                 <th>STT</th>
                 <th>
-                    @Html.DisplayNameFor(model => model.MaLopTinChi)
+                    Mã lớp
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TenLopTinChi)
+                    Tên lớp tín chỉ
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SoLuongToiDa)
+                    SL tối đa
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NgayBatDau)
+                    Ngày bắt đầu
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NgayKetThuc)
+                    Ngày kết thúc
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.KichHoat)
+                    Trạng thái
                 </th>
                 <th>Action</th>
                 <th></th>
