@@ -1,0 +1,114 @@
+﻿@model IEnumerable<QLDSV.Models.LopTinChi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .button {
+        float: right;
+        margin: 0 15px 10px 0; 
+        padding: 5px 10px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #0d6efd;
+        border: 1px solid #0d6efd;
+        border-radius: 5px;
+        text-align: center;
+        transition: background 0.1s ease;
+    }
+
+    .button:hover {
+        color: #fff;
+        background: #0d6efd
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .edit {
+        border: 1px solid transparent;
+        background: transparent;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Quản lý lớp tín chỉ
+        <small>Danh sách chi tiết</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Quản lý lớp tín chỉ</li>
+    </ol>
+</section>
+<hr />
+
+<a href="/LopTinChi/Create" class="btn bg-purple margin button"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>
+
+<section class="content">
+    <table id="gridDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaLopTinChi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenLopTinChi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoLuongToiDa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayBatDau)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayKetThuc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KichHoat)
+                </th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int i = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaLopTinChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenLopTinChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLuongToiDa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayBatDau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayKetThuc)
+                    </td>
+                    <td>
+                        @(item.KichHoat ? "Mở lớp" : "Đóng lớp")
+                    </td>
+                    <td>
+                        @item.LopTinChiID
+                    </td>
+                    <td>
+                        <a href="/LopTinChi/Edit/@(item.LopTinChiID)" type="button" class="btn btn-light edit" style="padding: 2px 15px;">Edit</a>
+                        <a href="/LopTinChi/Details/@(item.LopTinChiID)" type="button" class="btn btn-light edit" style="padding: 2px 15px;">Detail</a>
+                        <a href="/LopTinChi/Delete/@(item.LopTinChiID)" type="button" class="btn btn-danger" style="padding: 2px 15px;">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</section>

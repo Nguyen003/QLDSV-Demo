@@ -1,0 +1,104 @@
+﻿@*@model IEnumerable<QLDSV.Models.GiangVien>*@
+@model PagedList.IPagedList<QLDSV.Models.GiangVien>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .button {
+        float: right;
+        margin: 0 15px 10px 0;
+        padding: 5px 10px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #0d6efd;
+        border: 1px solid #0d6efd;
+        border-radius: 5px;
+        text-align: center;
+        transition: background 0.1s ease;
+    }
+
+        .button:hover {
+            color: #fff;
+            background: #0d6efd
+        }
+
+    td {
+        text-align: center;
+    }
+
+    .edit {
+        border: 1px solid transparent;
+        background: transparent;
+    }
+
+    .search {
+        text-align: center;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Danh sách giảng viên
+    </h1>
+</section>
+<hr />
+<a href="/GiangVien/Create" class="button">Thêm mới</a>
+@using (Html.BeginForm("Index", "GiangVien", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Tên Sv: </label>
+        <input type="Text" class="form-control mx-sm-3" value="@ViewBag.Keyword" name="search" placeholder="Nhập tên giảng viên cần tìm">
+        <input type="submit" class="btn btn-danger" value="Tìm kiếm">
+    </div>
+    <hr />
+}
+
+<section class="content">
+    <table id="gridDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <td>STT</td>
+                <td>Mã giảng viên</td>
+                <td>Họ và tên</td>
+                <td>Ngày sinh</td>
+                <td>Số điện thoại</td>
+                <td>Email</td>
+                <td>Ngày tạo</td>
+                <td>Action</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.MaGiangVien</td>
+                    <td>@item.HoTen</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                    <td>@item.SoDienThoai</td>
+                    <td>@item.Email</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                    <td>@item.GiangVienID</td>
+                    <td>
+                        <a href="/GiangVien/Edit/@(item.GiangVienID)" type="button" class="btn btn-light edit" style="padding: 2px 15px;">Edit</a>
+                        <a href="/GiangVien/Delete/@(item.GiangVienID)" type="button" class="btn btn-danger" style="padding: 2px 15px;">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</section>
+
+<div style="float: right;">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+</div>
+
+<div class="search">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

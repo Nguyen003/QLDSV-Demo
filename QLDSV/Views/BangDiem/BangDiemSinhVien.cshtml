@@ -1,0 +1,61 @@
+﻿@model IEnumerable<QLDSV.ViewModels.BangDiemMonHocViewModel>
+@using QLDSV.ViewModels;
+
+@{
+    ViewBag.Title = "BangDiemSinhVien";
+}
+
+<section class="content-header">
+    <h1>
+        Xem điểm
+        <small>Bảng điểm môn học</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Xem điểm</li>
+    </ol>
+</section>
+<hr />
+<section class="content">
+    <table id="gridBangDiemMonHocDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>
+                    Tên môn học
+                </th>
+                <th>
+                    Số tín chỉ
+                </th>
+                <th>
+                    Điểm TP
+                </th>
+                <th>
+                    Điểm Thi
+                </th>
+                <th>
+                    Điểm TB
+                </th>
+                <th>
+                    Điểm Chữ
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int i = 1; }
+            @foreach (BangDiemMonHocViewModel item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenMonHoc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoTinChi)</td>
+                    <td>@item.DiemThanhPhan</td>
+                    <td>@item.DiemThi</td>
+                    <td>@item.DiemTrungBinh</td>
+                    <td>@item.DiemChu</td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</section>

@@ -1,0 +1,139 @@
+﻿@*@model IEnumerable<QLDSV.Models.SinhVien>*@
+@model PagedList.IPagedList<QLDSV.Models.SinhVien>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Quản lý Sinh Viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .button {
+        float: right;
+        margin: 0 15px 10px 0;
+        padding: 5px 10px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #0d6efd;
+        border: 1px solid #0d6efd;
+        border-radius: 5px;
+        text-align: center;
+        transition: background 0.1s ease;
+    }
+    .button:hover {
+        color: #fff;
+        background: #0d6efd
+    }
+
+    td, th {
+        text-align: center;
+        margin-top: 50%;
+    }
+
+    .edit {
+        border: 1px solid transparent;
+        background: transparent;
+    }
+    .search {
+        text-align: center;
+    }
+</style>
+
+@Scripts.Render("~/bundles/jquery")
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Danh sách sinh viên
+    </h1>
+</section>
+<hr />
+
+<a href="/SinhVien/Create" class="button">Thêm mới</a>
+@using (Html.BeginForm("Index", "SinhVien", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Tên Sv: </label>
+        <input type="Text" class="form-control mx-sm-3" value="@ViewBag.Keyword" name="search" placeholder="Nhập tên sinh vien cần tìm">
+        <input type="submit" class="btn btn-danger" value="Tìm kiếm">
+    </div>
+    <hr />
+}
+
+<section class="content">
+    <table id="gridDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>
+                    Mã SV
+                </th>
+                <th>
+                    Họ và tên
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    Giới tính
+                </th>
+                <th>
+                    Số ĐT
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int i = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaSinhVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td>
+                        @(item.GioiTinh ? "Nam" : "Nữ")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sđt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GhiChu)
+                    </td>
+                    <td>
+                        @item.SinhVienID
+                    </td>
+                    <td>
+                        <a href="/SinhVien/Edit/@(item.SinhVienID)" type="button" class="btn btn-light edit" style="padding: 2px 15px;">Edit</a>
+                        <a href="/SinhVien/Delete/@(item.SinhVienID)" type="button" class="btn btn-danger" style="padding: 2px 15px;">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</section>
+
+<div style="float: right;">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+</div>
+
+<div class="search">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

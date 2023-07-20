@@ -1,0 +1,87 @@
+﻿@model IEnumerable<QLDSV.Models.NganhDaoTao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .button {
+        float: right;
+        margin: 0 15px 10px 0; 
+        padding: 5px 10px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #0d6efd;
+        border: 1px solid #0d6efd;
+        border-radius: 5px;
+        text-align: center;
+        transition: background 0.1s ease;
+    }
+
+    .button:hover {
+        color: #fff;
+        background: #0d6efd
+    }
+
+    td, th {
+        text-align: center;
+    }
+
+    .edit {
+        border: 1px solid transparent;
+        background: transparent;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Danh mục Ngành đào tạo
+    </h1>
+</section>
+<hr />
+
+<a href="/NganhDaoTao/Create" class="btn bg-purple margin button"><i class="fa fa-fw fa-plus"></i> Thêm mới</a>
+
+<section class="content">
+
+    <table id="gridDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <td>
+                    @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.TenNganh)
+                </td>
+                <td>Action</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int i = 1; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenNganh)
+                    </td>
+                    <td>
+                        @item.NganhDaoTaoID
+                    </td>
+                    <td>
+                        <a href="/NganhDaoTao/Edit/@(item.NganhDaoTaoID)" type="button" class="btn btn-light edit" style="padding: 2px 15px;">Edit</a>
+                        <a href="/NganhDaoTao/Details/@(item.NganhDaoTaoID)" type="button" class="btn btn-light edit" style="padding: 2px 15px;">Details</a>
+                        <a href="/NganhDaoTao/Delete/@(item.NganhDaoTaoID)" type="button" class="btn btn-danger" style="padding: 2px 15px;">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+
+</section>

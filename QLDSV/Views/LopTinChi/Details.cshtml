@@ -1,0 +1,236 @@
+﻿@model QLDSV.Models.LopTinChi
+@using QLDSV.ViewModels;
+
+@{
+    ViewBag.Title = "Details";
+
+    List<DanhSachLopViewModel> dataSinhVien = (List<DanhSachLopViewModel>)ViewData["dataSinhVien"];
+}
+
+<style>
+    .button {
+        margin-right: 15px;
+        padding: 5px 10px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #0d6efd;
+        border: 1px solid #0d6efd;
+        border-radius: 5px;
+        text-align: center;
+        transition: background 0.1s ease;
+    }
+
+    .button:hover {
+        color: #fff;
+        background: #0d6efd
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Quản lý lớp tín chỉ
+        <small>Thông tin chi tiết</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Xem chi tiết</li>
+    </ol>
+</section>
+<hr />
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Thông tin lớp</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-horizontal">
+                                @Html.HiddenFor(model => model.LopTinChiID, new { id = "hLopTinChiID" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NganhDaoTao.KhoaID, "Khoa", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("KhoaID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NghanhDaoTaoID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("NganhDaoTaoID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MaLopTinChi, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DisplayFor(model => model.MaLopTinChi, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TenLopTinChi, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DisplayFor(model => model.TenLopTinChi, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SoLuongToiDa, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DisplayFor(model => model.SoLuongToiDa, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MonHocID, "Môn học", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("MonHocID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.GiangVienID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("GiangVienID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NgayBatDau, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DisplayFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NgayKetThuc, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DisplayFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.KichHoat, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @if (Model.KichHoat == true)
+                                        {
+                                            <span class="label label-success">Đang mở</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-danger">Đang đóng</span>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Danh sách sinh viên</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="gridSinhVienDetails" class="table table-bordered table-striped hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>
+                                    Mã SV
+                                </th>
+                                <th>
+                                    Họ và tên
+                                </th>
+                                <th>
+                                    Ngày sinh
+                                </th>
+                                <th>
+                                    Điểm TP
+                                </th>
+                                <th>
+                                    Điểm Thi
+                                </th>
+                                <th>
+                                    Điểm TB
+                                </th>
+                                <th>
+                                    Điểm Chữ
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i = 1;}
+                            @foreach (DanhSachLopViewModel item in dataSinhVien)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>
+                                        @item.MaSinhVien.ToString()
+                                    </td>
+                                    <td>
+                                        @item.HoTen.ToString()
+                                    </td>
+                                    <td>
+                                        @item.NgaySinh.Value.ToString("dd-MM-yyyy")
+                                    </td>
+                                    <td>
+                                        @item.DiemThanhPhan.ToString()
+                                    </td>
+                                    <td>
+                                        @item.DiemThi.ToString()
+                                    </td>
+                                    <td>
+                                        @item.DiemTrungBinh.ToString()
+                                    </td>
+                                    <td>
+                                        @item.DiemChu
+                                    </td>
+                                    <td>
+                                        @item.SinhVienID.ToString()
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-7">
+            @Html.ActionLink("Thêm sinh viên", "ThemSinhVienVaoLop", new { id = Model.LopTinChiID }, new { @class = "btn bg-maroon margin button" })
+            @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn bg-purple margin button" })
+        </div>
+    </div>
+</section>

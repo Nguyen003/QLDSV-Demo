@@ -1,0 +1,64 @@
+﻿@model IEnumerable<QLDSV.Models.LopTinChi>
+@using QLDSV.ViewModels;
+
+@{
+    ViewBag.Title = "GetLopOfGiangVien";
+}
+
+<section class="content-header">
+    <h1>
+        Danh sách lớp giảng dạy
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Danh sách lớp</li>
+    </ol>
+</section>
+<hr />
+<section class="content">
+    <table id="gridLopTinChiDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>
+                    Mã lớp
+                </th>
+                <th>
+                    Tên lớp
+                </th>
+                <th>
+                    Môn học
+                </th>
+                <th>
+                    Số TC
+                </th>
+                <th>
+                    Ngày bắt đầu
+                </th>
+                <th>
+                    Ngày kết thúc
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int i = 1; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelItem => item.MaLopTinChi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenLopTinChi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenMonHoc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoTinChi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgayBatDau)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgayKetThuc)</td>
+                    <td>@item.LopTinChiID</td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</section>

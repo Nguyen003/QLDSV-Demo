@@ -1,0 +1,89 @@
+﻿@model IEnumerable<QLDSV.Models.BangDiem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<section class="content-header">
+    <h1>
+        Quản lý bảng điểm
+        <small>Danh sách chi tiết</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">Quản lý bảng điểm</li>
+    </ol>
+</section>
+<hr />
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Khoa</label>
+                                @Html.DropDownList("KhoaID", null, htmlAttributes: new { @class = "form-control", @onchange = "khoaChange()" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Ngành đào tạo</label>
+                                @Html.DropDownList("NganhDaoTaoID", null, htmlAttributes: new { @class = "form-control", @onchange = "nganhDaoTaoChange()" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Môn học</label>
+                                @Html.DropDownList("MonHocID", null, htmlAttributes: new { @class = "form-control", @onchange = "monHocChange()" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Lớp học</label>
+                                @Html.DropDownList("LopTinChiID", null, htmlAttributes: new { @class = "form-control", @onchange = "lopTinChiChange()" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+    <table id="gridBangDiemSinhVienDetails" class="table table-bordered table-striped hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>
+                    Mã SV
+                </th>
+                <th>
+                    Họ và tên
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    Điểm TP
+                </th>
+                <th>
+                    Điểm Thi
+                </th>
+                <th>
+                    Điểm TB
+                </th>
+                <th>
+                    Điểm Chữ
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+
